@@ -13,22 +13,63 @@ var numbers = confirm("Click OK to include numbers in your password. Click Cance
 // special characters
 var specialCharacters = confirm("Click OK to include special characters in your password. Click Cancel to exclude special characters from your password.");
 
+var objLength = JSON.parse(characterAmount);
+var length = characterAmount
+
+function generatePassword (characterAmount) {
+  var result = "";
+
+  if (lowerCase)  {
+    var characters = "acdefghijklmnopqrstuvwxyz"
+    if (upperCase) {
+      var characters = "acdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+      if (numbers) {
+        var characters = "acdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
+        if (specialCharacters) {
+          var characters = "acdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!#$%&'()*+,-./:;<=>?@[\]^_`{|}~"
+        }
+      }
+    }
+  }   
+
+  else if (upperCase) {
+    var characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    if (numbers) {
+      var characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
+      if (specialCharacters) {
+        var characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!#$%&'()*+,-./:;<=>?@[\]^_`{|}~"
+      }
+    }
+  }
+
+  else if (numbers) {
+    var characters = "1234567890"
+    if (specialCharacters) {
+      var characters = "1234567890!#$%&'()*+,-./:;<=>?@[\]^_`{|}~"
+    }
+  }
+
+  else if (specialCharacters) {
+    var characters = "!#$%&'()*+,-./:;<=>?@[\]^_`{|}~"
+  }
+
+  var charactersLength = characters.length;
+  for (var i = 0; i < length; i++) {
+    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+  }
+  return result
+}
+
+
+
+
+
 
 // Write password to the #password input
 function writePassword() {
   var password = generatePassword();
   var passwordText = document.querySelector("#password");
-  var length = characterAmount
   passwordText.value = password;
 }
-
-generatePassword () {}
-
-
-
-
-}
-
-
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
